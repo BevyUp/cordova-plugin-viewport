@@ -5,7 +5,7 @@
  */
 module.exports = function(ctx) {
     // make sure android platform is part of build
-    if (!ctx.opts.platforms.indexOf('android') >= 0) {
+    if (ctx.opts.platforms.indexOf('android') < 0) {
         return;
     }
 
@@ -40,7 +40,7 @@ function getConfig(ctx) {
 /**
  * @param {Context} ctx Cordova HookRunner context object
  * @param {Object} config Extract of required configurations from config.xml.
- * @return {string}
+ * @return {string} Template with the correct package name and activity name
  */
 function getTemplate(ctx, config) {
     var fs = ctx.requireCordovaModule('fs'),
