@@ -5,7 +5,7 @@
  */
 module.exports = function(ctx) {
     // make sure android platform is part of build
-    if (!ctx.opts.platforms.includes('android')) {
+    if (!ctx.opts.platforms.indexOf('android') >= 0) {
         return;
     }
 
@@ -32,9 +32,9 @@ function getConfig(ctx) {
     var packagePath = packageName.replace(/\./g, path.sep);
     var activityPath = path.join(projectRoot, 'platforms/android/src', packagePath, activityName + '.java');
 
-    var isXwalk = ctx.opts.cordova.plugins.includes('cordova-plugin-crosswalk-webview')
+    var isXwalk = ctx.opts.cordova.plugins.indexOf('cordova-plugin-crosswalk-webview') >= 0
 
-    return { packageName, activityPath, activityName, isXwalk };
+    return { packageName: packageName, activityPath: activityPath, activityName: activityName, isXwalk: isXwalk };
 }
 
 /**
